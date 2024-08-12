@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "81579083278",
+    "project_id": "jetbrain-compose",
+    "storage_bucket": "jetbrain-compose.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81579083278:android:8cbe222ce218b74ee91e5f",
+        "android_client_info": {
+          "package_name": "com.example.mindbenders"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQia39WuILV_23qQQhOynffvqHLZzalGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

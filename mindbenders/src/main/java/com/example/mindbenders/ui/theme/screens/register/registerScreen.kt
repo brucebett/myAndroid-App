@@ -1,5 +1,6 @@
 package com.example.mindbenders.ui.theme.screens.register
 
+import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -38,15 +39,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.mindbenders.R
+import com.example.mindbenders.data.AuthViewModel
 import com.example.mindbenders.navigation.ROUTE_HOME
 import com.example.mindbenders.navigation.ROUTE_LOGIN
 import com.example.mindbenders.ui.theme.MindBendersTheme
 
+
 @Composable
 fun Greeting(name: String, navController: NavController) {
-    var firstName by remember { mutableStateOf("") }
-    var lastName by remember { mutableStateOf("") }
-    var emailAddress by remember { mutableStateOf("") }
+    var firstname by remember { mutableStateOf("") }
+    var lastname by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -78,8 +82,8 @@ fun Greeting(name: String, navController: NavController) {
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = firstName,
-            onValueChange = { firstName = it },
+            value = firstname,
+            onValueChange = { firstname = it },
             label = { Text(text = "Enter First Name") },
             placeholder = { Text(text = "Please enter your first name") },
             modifier = Modifier
@@ -90,8 +94,8 @@ fun Greeting(name: String, navController: NavController) {
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = lastName,
-            onValueChange = { lastName = it },
+            value = lastname,
+            onValueChange = { lastname = it },
             label = { Text(text = "Enter Last Name") },
             placeholder = { Text(text = "Please enter your last name") },
             modifier = Modifier
@@ -102,8 +106,8 @@ fun Greeting(name: String, navController: NavController) {
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = emailAddress,
-            onValueChange = { emailAddress = it },
+            value = email,
+            onValueChange = { email = it },
             label = { Text(text = "Enter Email Address") },
             placeholder = { Text(text = "Please enter your email address") },
             modifier = Modifier
@@ -113,9 +117,23 @@ fun Greeting(name: String, navController: NavController) {
 
         Spacer(modifier = Modifier.height(10.dp))
 
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text(text = "Enter First Name") },
+            placeholder = { Text(text = "Please enter your first name") },
+            modifier = Modifier
+                .wrapContentWidth()
+                .align(Alignment.CenterHorizontally)
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+
         Button(
             onClick = {
-                       navController.navigate(ROUTE_HOME)
+                       var register = AuthViewModel(navController, context )
+                register.signup(firstname.trim(),lastname.trim(),email.trim(),password.trim())
             },
             colors = ButtonDefaults.buttonColors(Color.Green),
             modifier = Modifier
