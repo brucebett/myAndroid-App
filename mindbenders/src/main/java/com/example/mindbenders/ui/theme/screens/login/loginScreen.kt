@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -39,11 +40,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.mindbenders.R
+import com.example.mindbenders.data.AuthViewModel
 import com.example.mindbenders.ui.theme.MindBendersTheme
+import kotlin.math.log
 
 @Composable
 fun Login(navController: NavController) {
-    var username by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     Column(
@@ -76,10 +79,10 @@ fun Login(navController: NavController) {
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text(text = "Enter UserName") },
-            placeholder = { Text(text = "Please enter your username") },
+            value = email,
+            onValueChange = { email = it },
+            label = { Text(text = "Enter email") },
+            placeholder = { Text(text = "Please enter your email") },
             modifier = Modifier
                 .wrapContentWidth()
                 .align(Alignment.CenterHorizontally)
@@ -99,10 +102,12 @@ fun Login(navController: NavController) {
         )
 
         Spacer(modifier = Modifier.height(10.dp))
+        val context = LocalContext.current
 
         Button(
             onClick = {
-                // Implement registration action
+                val login = AuthViewModel(navController, context)
+                login.login(email.trim() , password.trim())
             },
             colors = ButtonDefaults.buttonColors(Color.Red),
             modifier = Modifier

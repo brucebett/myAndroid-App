@@ -48,7 +48,7 @@ import com.example.mindbenders.ui.theme.MindBendersTheme
 
 @Composable
 fun Greeting(name: String, navController: NavController) {
-    val context = LocalContext.current
+
     var firstname by remember { mutableStateOf("") }
     var lastname by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -130,12 +130,14 @@ fun Greeting(name: String, navController: NavController) {
         )
 
         Spacer(modifier = Modifier.height(10.dp))
+        val context = LocalContext.current
 
 
         Button(
             onClick = {
                        var register = AuthViewModel(navController, context )
                 register.signup(firstname.trim(),lastname.trim(),email.trim(),password.trim())
+                navController.navigate(ROUTE_LOGIN)
             },
             colors = ButtonDefaults.buttonColors(Color.Green),
             modifier = Modifier
